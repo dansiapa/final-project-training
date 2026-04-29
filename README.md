@@ -13,10 +13,9 @@ Sistem menggunakan teknik pembacaan data secara bertahap menggunakan `chunksize`
 * **Real-time Monitoring**: Menampilkan log progres pemrosesan (jumlah baris dan chunk) langsung di terminal.
 
 ### 2. Multi-Model Leaderboard
-Sistem melatih dan membandingkan 6 algoritma sekaligus untuk mencari akurasi terbaik:
+Sistem melatih dan membandingkan 4 algoritma sekaligus untuk mencari akurasi terbaik:
 * **Ensemble Learning**: XGBoost & Random Forest.
 * **Standard Models**: Linear/Logistic Regression & Decision Tree.
-* **Instance/Kernel Models**: K-Nearest Neighbors (KNN) & Support Vector Machine (SVM).
 
 ### 3. Auto-Inference Engine
 Sistem secara cerdas mendeteksi tipe masalah berdasarkan distribusi data target:
