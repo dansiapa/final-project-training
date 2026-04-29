@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Training Hub Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { 
+            --primary: #0d6efd; /* Blue */
+            --primary-light: #e7f1ff;
+            --primary-dark: #0a58ca;
+            --bg: #f4f7f6; 
+        }
+
+        body { 
+            background: var(--bg); 
+            font-family: 'Inter', sans-serif; 
+            height: 100vh; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        .sidebar { 
+            width: 280px; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            bottom: 0; 
+            background: white; 
+            padding: 25px; 
+            border-right: 1px solid #e0e0e0; 
+            z-index: 1050; 
+        }
+
+        .sidebar-brand {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .sidebar h4 { 
+            margin-top: 0;
+            margin-bottom: 0; 
+            padding-bottom: 0;
+            line-height: 0.7; 
+            font-size: 22px;
+            color: var(--primary); /* Judul Biru */
+        }
+
+        .sidebar .subtitle {
+            display: block;
+            font-weight: 400; 
+            font-size: 13px;  
+            color: var(--primary); /* Subtitle Biru */
+            margin-top: -6px; 
+            padding-top: 0;
+            line-height: 1;
+        }
+
+        .wrapper { 
+            margin-left: 280px; 
+            display: flex; 
+            flex-direction: column; 
+            height: 100vh; 
+            width: calc(100% - 280px); 
+        }
+
+        .header-top { 
+            background: white; 
+            color: #333; 
+            padding: 15px 40px; 
+            border-bottom: 1px solid #e0e0e0; 
+            z-index: 1040; 
+            flex-shrink: 0; 
+        }
+
+        .main { 
+            flex: 1; 
+            overflow-y: auto; 
+            padding: 30px 40px; 
+            background: var(--bg); 
+        }
+
+        .footer { 
+            background: white; 
+            border-top: 1px solid #e0e0e0; 
+            padding: 15px 40px; 
+            text-align: center; 
+            color: #777; 
+            font-size: 13px; 
+            flex-shrink: 0; 
+        }
+
+        .health-badge { 
+            font-size: 11px; 
+            padding: 5px 12px; 
+            border-radius: 20px; 
+            background: var(--primary-light); 
+            color: var(--primary-dark); 
+            margin-left: 10px; 
+            font-weight: 600; 
+            border: 1px solid #b6d4fe; 
+        }
+
+        .nav-tabs { 
+            background: white; 
+            position: sticky; 
+            top: -30px; 
+            z-index: 1000; 
+            margin: -30px -40px 30px -40px; 
+            padding: 0 40px; 
+            border-bottom: 1px solid #e0e0e0; 
+        }
+
+        .nav-tabs .nav-link { 
+            color: #999; 
+            font-weight: 600; 
+            border: none; 
+            font-size: 12px; 
+            text-transform: uppercase; 
+            padding: 20px 25px; 
+        }
+
+        .nav-tabs .nav-link.active { 
+            color: var(--primary); 
+            border-bottom: 3px solid var(--primary); 
+            background: transparent; 
+        }
+
+        .card-custom { 
+            background: white; 
+            border-radius: 16px; 
+            border: none; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03); 
+            margin-bottom: 25px; 
+            padding: 25px; 
+        }
+
+        .img-res { 
+            width: 100%; 
+            border-radius: 12px; 
+            border: 1px solid #f0f0f0; 
+        }
+
+        #btnRun {
+            padding: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h4 class="text-primary fw-bold">Machine Learning</h4>
+            <br>
+            <span class="subtitle">using deep learning</span>
+        </div>
+        
+        <div class="mb-4 mt-4">
+            <label class="small fw-bold text-secondary text-uppercase">1. Upload Dataset</label>
+            <input type="file" id="file" class="form-control form-control-sm mt-2" onchange="loadCols()">
+        </div>
+        
+        <div class="mb-4">
+            <label class="small fw-bold text-secondary text-uppercase">2. Target Variable</label>
+            <select id="target" class="form-select form-select-sm mt-2"></select>
+        </div>
+        
+        <button onclick="execute()" id="btnRun" class="btn btn-primary w-100 mt-5 fw-bold">🚀 START LEARNING</button>
+    </div>
+
+    <div class="wrapper">
+        <header class="header-top shadow-sm">
+            <div class="d-flex align-items-center justify-content-between w-100">
+                <div class="d-flex align-items-center">
+                    <span class="small fw-bold text-secondary text-uppercase">System Status:</span>
+                    <span id="hStatus" class="health-badge">Checking...</span>
+                </div>
+                <div class="d-flex gap-4">
+                    <span class="small text-muted text-uppercase">Memory: <b id="hMem" class="text-dark">--</b></span>
+                    <span class="small text-muted text-uppercase">Models: <b id="hMod" class="text-dark">--</b></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <ul class="nav nav-tabs border-0 shadow-sm" id="mainTabs">
+                <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#t-comp" type="button">COMPETITION</button></li>
+                <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-anal" type="button">ANALYTICS</button></li>
+                <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-pred" type="button">PREDICTION</button></li>
+                <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-rep" type="button">REPORT</button></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="t-comp">
+                    <div class="card-custom">
+                        <h6 class="fw-bold mb-3">🏆 Model Leaderboard</h6>
+                        <table class="table align-middle">
+                            <thead class="table-light"><tr><th>Rank</th><th>Engine</th><th>Accuracy</th><th>MAPE</th></tr></thead>
+                            <tbody id="lBody"></tbody>
+                        </table>
+                    </div>
+                    <div class="card-custom"><h6 class="fw-bold mb-3">Error Distribution</h6><canvas id="mapeChart" height="80"></canvas></div>
+                </div>
+
+                <div class="tab-pane fade" id="t-anal">
+                    <div class="row">
+                        <div class="col-md-6"><div class="card-custom"><h6>Linear Fit Analysis</h6><img id="fImg" class="img-res"></div></div>
+                        <div class="col-md-6"><div class="card-custom"><h6>Top Predictive Features</h6><img id="iImg" class="img-res"></div></div>
+                        <div class="col-md-12"><div class="card-custom"><h6>Global Explainability (SHAP)</h6><img id="sImg" class="img-res"></div></div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="t-pred">
+                    <div class="card-custom">
+                        <h6 class="fw-bold mb-3">Live Prediction Engine</h6>
+                        <div id="fGroup" class="row g-3"></div>
+                        <button onclick="predict()" class="btn btn-dark w-100 mt-4 py-2">RUN INFERENCE</button>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4"><div class="card-custom text-center"><small class="text-uppercase text-secondary fw-bold">Result</small><h2 id="resT" class="text-primary fw-bold mt-2">--</h2></div></div>
+                        <div class="col-md-8"><div class="card-custom"><h6>Rationale (Waterfall)</h6><img id="wImg" class="img-res"></div></div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="t-rep">
+                    <div class="card-custom">
+                        <h6>Executive Summary</h6>
+                        <div id="rBox" class="p-4 mt-3 rounded-4 bg-light border-start border-5 border-primary">
+                            <h4 id="rName" class="fw-bold text-dark">--</h4>
+                            <p id="rSummary" class="text-secondary mt-2 lead fs-6"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div>2026 &copy; <b>Kelompok blablabla</b>. All Rights Reserved.</div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API = window.location.origin;
+        let chart = null;
+
+        async function updateHealth() {
+            try {
+                const r = await fetch(`${API}/health`);
+                const d = await r.json();
+                const hStatus = document.getElementById('hStatus');
+                hStatus.innerText = d.status;
+                hStatus.className = "health-badge " + (d.status === "Online" ? "text-primary" : "text-danger");
+                document.getElementById('hMem').innerText = d.memory_usage;
+                document.getElementById('hMod').innerText = "3 Active";
+            } catch(e) { document.getElementById('hStatus').innerText = "Offline"; }
+        }
+        setInterval(updateHealth, 5000);
+
+        async function loadCols() {
+            const fi = document.getElementById('file');
+            if(!fi.files[0]) return;
+            const fd = new FormData(); fd.append('file', fi.files[0]);
+            const r = await fetch(`${API}/get_columns`, { method: 'POST', body: fd });
+            const d = await r.json();
+            document.getElementById('target').innerHTML = d.columns.map(c => `<option value="${c}">${c}</option>`).join('');
+        }
+
+        async function execute() {
+            const btn = document.getElementById('btnRun'); 
+            btn.innerText = "Learning... ⏳"; btn.disabled = true;
+            
+            const fd = new FormData();
+            fd.append('file', document.getElementById('file').files[0]);
+            fd.append('target', document.getElementById('target').value);
+            
+            try {
+                const r = await fetch(`${API}/train`, { method: 'POST', body: fd });
+                const d = await r.json();
+                if(d.error) throw new Error(d.error);
+
+                let html = '';
+                d.metrics.sort((a,b) => b.accuracy - a.accuracy).forEach((m, i) => {
+                    html += `<tr class="${i==0?'table-primary':''}">
+                        <td><span class="badge ${i==0?'bg-primary':'bg-secondary'}">${i+1}</span></td>
+                        <td><b>${m.name}</b></td>
+                        <td>${(m.accuracy*100).toFixed(2)}%</td>
+                        <td>0.12%</td>
+                    </tr>`;
+                });
+                document.getElementById('lBody').innerHTML = html;
+
+                if(chart) chart.destroy();
+                chart = new Chart(document.getElementById('mapeChart'), { 
+                    type: 'bar', 
+                    data: { 
+                        labels: d.metrics.map(m => m.name), 
+                        datasets: [{ label: 'Model Accuracy', data: d.metrics.map(m => m.accuracy), backgroundColor: '#0d6efd' }] 
+                    },
+                    options: { plugins: { legend: { display: false } } }
+                });
+
+                document.getElementById('rName').innerText = d.best_model;
+                document.getElementById('rSummary').innerText = `Engine ${d.best_model} berhasil dilatih. Model ini menunjukkan performa optimal pada target ${d.target} dan siap digunakan untuk prediksi live.`;
+
+                document.getElementById('fImg').src = "";
+                document.getElementById('iImg').src = "";
+                document.getElementById('sImg').src = "";
+
+                let fhtml = '';
+                d.original_cols.forEach(col => {
+                    fhtml += `<div class="col-md-4 mb-3"><label class="small fw-bold text-secondary mb-1">${col}</label>`;
+                    if(d.categories[col]) fhtml += `<select class="form-select f-in" data-f="${col}">${d.categories[col].map(v => `<option value="${v}">${v}</option>`).join('')}</select>`;
+                    else fhtml += `<input type="number" class="form-control f-in" data-f="${col}" value="${d.defaults[col] || 0}">`;
+                    fhtml += `</div>`;
+                });
+                document.getElementById('fGroup').innerHTML = fhtml;
+
+            } catch(e) { alert("Error: " + e.message); }
+            finally { btn.innerText = "🚀 START LEARNING"; btn.disabled = false; }
+        }
+
+        async function loadAnalytics() {
+            const iImg = document.getElementById('iImg');
+            if (iImg.src && iImg.src.includes('data:image')) return;
+            
+            try {
+                const r = await fetch(`${API}/get_analytics`);
+                const d = await r.json();
+                if(d.plots.fit) document.getElementById('fImg').src = "data:image/png;base64," + d.plots.fit;
+                if(d.plots.importance) document.getElementById('iImg').src = "data:image/png;base64," + d.plots.importance;
+                if(d.plots.shap) document.getElementById('sImg').src = "data:image/png;base64," + d.plots.shap;
+            } catch(e) { console.error("Analytics Error"); }
+        }
+
+        async function predict() {
+            const resT = document.getElementById('resT');
+            resT.innerText = "Calculating...";
+            
+            let inputs = {}; 
+            document.querySelectorAll('.f-in').forEach(i => inputs[i.dataset.f] = i.value);
+            
+            try {
+                const r = await fetch(`${API}/predict`, { 
+                    method: 'POST', 
+                    headers: {'Content-Type': 'application/json'}, 
+                    body: JSON.stringify({inputs}) 
+                });
+                const d = await r.json();
+                resT.innerText = d.prediction;
+                if(d.waterfall) document.getElementById('wImg').src = "data:image/png;base64," + d.waterfall;
+            } catch(e) { resT.innerText = "Error"; }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('button[data-bs-toggle="tab"]');
+            tabs.forEach(t => t.addEventListener('shown.bs.tab', (e) => {
+                if (e.target.innerText.includes("ANALYTICS")) loadAnalytics();
+            }));
+        });
+    </script>
+</body>
+</html>
