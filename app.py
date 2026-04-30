@@ -12,6 +12,8 @@ from sklearn.metrics import r2_score, accuracy_score
 from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsRegressor, KNeighborsClassifier
 from sklearn.svm import SVR, SVC
+import psutil
+import GPUtil
 
 app = Flask(__name__)
 CORS(app)
@@ -36,9 +38,23 @@ def index(): return render_template('index.html')
 
 @app.route('/health', methods=['GET'])
 def health_check():
+    gpus = GPUtil.getGPUs()
+    gpu_stats = []
+    
+    for gpu in gpus:
+        gpu_stats.append({
+            "id": gpu.id,
+            "name": gpu.name,
+            "load": f"{gpu.load * 100:.1f}%",
+            "memory_used": f"{gpu.memoryUsed}MB",
+            "memory_total": f"{gpu.memoryTotal}MB",
+            "temperature": f"{gpu.temperature} °C"
+        })
+
     return jsonify({
-        "status": "Online", 
-        "memory": f"{psutil.virtual_memory().percent}%", 
+        "status": "Online",
+        "memory_usage": f"{psutil.virtual_memory().percent}%",
+        "gpu_usage": gpu_stats if gpu_stats else "No GPU detected",
         "engine": "Unlimited Chunking"
     })
 
