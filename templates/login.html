@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm border border-gray-200">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Login dulu bro!!</h2>
+        
+        <div id="errorMessage" class="hidden mb-4 p-3 bg-red-100 border border-red-400 text-red-700 text-sm rounded">
+            Username atau password salah!
+        </div>
+
+        <form id="loginForm">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                    Username
+                </label>
+                <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" 
+                       type="text" id="username" placeholder="Masukkan username" required>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                    Password
+                </label>
+                <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" 
+                       type="password" id="password" placeholder="********" required>
+            </div>
+            
+            <button class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 active:scale-95 transition duration-200" 
+                    type="submit">
+                Masuk
+            </button>
+        </form>
+        
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const usernameInput = document.getElementById('username').value;
+            const passwordInput = document.getElementById('password').value;
+            const errorBox = document.getElementById('errorMessage');
+
+            const VALID_USER = "admin";
+            const VALID_PASS = "admin";
+
+            errorBox.classList.add('hidden');
+
+            if (usernameInput === VALID_USER && passwordInput === VALID_PASS) {
+                window.location.href = "/home";
+            } else {
+                errorBox.classList.remove('hidden');
+                document.getElementById('password').value = "";
+            }
+        });
+    </script>
+</body>
+</html>
