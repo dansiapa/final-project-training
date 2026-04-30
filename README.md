@@ -1,4 +1,5 @@
-# 🚀 Final Project Training AMDI - Astra Digital - Advance Data Analytics
+# 🚀 Machine Learning (Auto ML - is Like AI for Prediction)
+###### Astra Digital Training - Advance Data Analytics
 
 Aplikasi berbasis web ini merupakan platform otomatisasi Machine Learning (AutoML) yang dirancang untuk menangani alur kerja data science secara end-to-end. Fokus utama pengembangan adalah pada efisiensi penggunaan memori melalui **Smart Chunking** dan transparansi model menggunakan **Explainable AI (XAI)**.
 
@@ -112,7 +113,3 @@ Akses aplikasi melalui browser di alamat: `http://127.0.0.1:5000`
     *   Buka tab **Analytics** untuk melihat korelasi fitur dan SHAP global.
     *   Buka tab **Summary** untuk mendapatkan narasi analisis otomatis.
 5.  **Inference**: Masukkan data baru pada tab **Prediction** untuk mendapatkan estimasi instan beserta grafik kontribusi *SHAP Waterfall*.
-
----
-2026 © **Precision Data Analytics Suite** | Astra Digital - Advance Data Analytics
-```
