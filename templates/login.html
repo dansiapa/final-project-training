@@ -1,183 +1,65 @@
-import io, base64, pandas as pd, numpy as np, matplotlib, logging, shap
-from datetime import datetime
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import seaborn as sns
-from flask import Flask, request, jsonify, render_template
-from flask_cors import CORS
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.linear_model import Ridge, LogisticRegression
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from xgboost import XGBRegressor, XGBClassifier
-from sklearn.metrics import r2_score, accuracy_score
-import psutil
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
 
-# --- KONFIGURASI LOGGING ---
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
-logger = logging.getLogger(__name__)
-
-app = Flask(__name__)
-CORS(app)
-
-# Global state untuk menyimpan data antar endpoint
-state = {
-    "models": {}, "scaler": StandardScaler(), "le_y": LabelEncoder(),
-    "features": [], "is_reg": True, "target": "", "df_raw": None, "df_processed": None,
-    "best_model_name": "", "categorical_maps": {}, 
-    "numeric_defaults": {}, "X_test": None, "y_test": None
-}
-
-def get_b64():
-    try:
-        buf = io.BytesIO()
-        plt.savefig(buf, format='png', bbox_inches='tight', dpi=100)
-        plt.close('all')
-        return base64.b64encode(buf.getvalue()).decode('utf-8')
-    except Exception as e:
-        logger.error(f"Gagal generate gambar: {e}")
-        return ""
-
-@app.route('/')
-def index(): return render_template('login.html')
-
-@app.route('/home')
-def home(): return render_template('index.html')
-
-@app.route('/health', methods=['GET'])
-def health_check():
-    return jsonify({
-        "status": "Online",
-        "cpu": f"{psutil.cpu_percent()}%",
-        "memory": f"{psutil.virtual_memory().percent}%"
-    })
-
-# --- ENDPOINT TRAIN (FOKUS PADA KECEPATAN) ---
-@app.route('/train', methods=['POST'])
-def train():
-    global state
-    start_time = datetime.now()
-    logger.info("--- MEMULAI PROSES TRAINING (LIGHTWEIGHT MODE) ---")
-    
-    try:
-        file = request.files['file']
-        target = request.form['target']
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm border border-gray-200">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Login dulu bro!!</h2>
         
-        df = pd.read_csv(file).dropna()
-        state["df_raw"] = df # Simpan untuk analytics nanti
+        <div id="errorMessage" class="hidden mb-4 p-3 bg-red-100 border border-red-400 text-red-700 text-sm rounded">
+            Username atau password salah!
+        </div>
+
+        <form id="loginForm">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                    Username
+                </label>
+                <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" 
+                       type="text" id="username" placeholder="Masukkan username" required>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                    Password
+                </label>
+                <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" 
+                       type="password" id="password" placeholder="********" required>
+            </div>
+            
+            <button class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 active:scale-95 transition duration-200" 
+                    type="submit">
+                Masuk
+            </button>
+        </form>
         
-        is_reg = not (df[target].dtype == 'object' or df[target].nunique() < 10)
-        state.update({"target": target, "is_reg": is_reg})
+    </div>
 
-        # Preprocessing Cepat
-        X = pd.get_dummies(df.drop(columns=[target]))
-        y = df[target]
-        
-        state["features"] = list(X.columns)
-        state["numeric_defaults"] = df.select_dtypes(include=[np.number]).median().to_dict()
-        state["categorical_maps"] = {col: df[col].unique().tolist() for col in df.select_dtypes(include=['object']).columns}
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const usernameInput = document.getElementById('username').value;
+            const passwordInput = document.getElementById('password').value;
+            const errorBox = document.getElementById('errorMessage');
 
-        if not is_reg: y = state["le_y"].fit_transform(y)
-        X_sc = state["scaler"].fit_transform(X)
-        X_tr, X_te, y_tr, y_te = train_test_split(X_sc, y, test_size=0.2, random_state=42)
-        
-        # Simpan data test untuk SHAP di endpoint analytics
-        state["X_test"] = X_te
-        state["y_test"] = y_te
+            const VALID_USER = "admin";
+            const VALID_PASS = "admin";
 
-        models_config = {
-            "XGBoost": XGBRegressor() if is_reg else XGBClassifier(),
-            "Random Forest": RandomForestRegressor() if is_reg else RandomForestClassifier(),
-            "Linear/Log Reg": Ridge() if is_reg else LogisticRegression(max_iter=500)
-        }
+            errorBox.classList.add('hidden');
 
-        metrics = []
-        best_score = -999
-        for name, m in models_config.items():
-            m.fit(X_tr, y_tr)
-            preds = m.predict(X_te)
-            score = r2_score(y_te, preds) if is_reg else accuracy_score(y_te, preds)
-            state["models"][name] = m
-            metrics.append({"name": name, "accuracy": score})
-            if score > best_score:
-                best_score = score
-                state["best_model_name"] = name
-
-        duration = (datetime.now() - start_time).total_seconds()
-        logger.info(f"Training Selesai dalam {duration:.2f}s. Model Terbaik: {state['best_model_name']}")
-
-        return jsonify({
-            "status": "success",
-            "metrics": metrics,
-            "best_model": state["best_model_name"],
-            "features": state["features"],
-            "defaults": state["numeric_defaults"],
-            "categories": state["categorical_maps"]
-        })
-    except Exception as e:
-        logger.error(f"Error Training: {str(e)}")
-        return jsonify({"error": str(e)}), 500
-
-# --- ENDPOINT ANALYTICS (PENGHITUNGAN BERAT DIPINDAH KE SINI) ---
-@app.route('/analytics', methods=['GET'])
-def get_analytics():
-    if state["df_raw"] is None:
-        return jsonify({"error": "Selesaikan training terlebih dahulu"}), 400
-    
-    start_an = datetime.now()
-    logger.info("--- MEMULAI PROSES ANALYTICS & SHAP ---")
-    
-    try:
-        graphs = {}
-        df = state["df_raw"]
-        target = state["target"]
-
-        # 1. Grafik Distribusi
-        plt.figure(figsize=(8, 4))
-        sns.histplot(df[target], kde=True, color='blue')
-        plt.title(f"Distribusi Target: {target}")
-        graphs["dist"] = get_b64()
-
-        # 2. Grafik Heatmap Korelasi
-        plt.figure(figsize=(10, 8))
-        X_temp = pd.get_dummies(df.drop(columns=[target]))
-        sns.heatmap(X_temp.corr(), cmap='coolwarm', annot=False)
-        plt.title("Correlation Map")
-        graphs["corr"] = get_b64()
-
-        # 3. SHAP (Proses paling berat)
-        logger.info(f"Kalkulasi SHAP untuk {state['best_model_name']}...")
-        model = state["models"][state["best_model_name"]]
-        explainer = shap.Explainer(model, state["X_test"])
-        shap_values = explainer(state["X_test"])
-        
-        plt.figure()
-        shap.summary_plot(shap_values, state["X_test"], feature_names=state["features"], show=False)
-        graphs["shap"] = get_b64()
-
-        duration = (datetime.now() - start_an).total_seconds()
-        logger.info(f"Analytics Selesai dalam {duration:.2f}s")
-        
-        return jsonify(graphs)
-    except Exception as e:
-        logger.error(f"Error Analytics: {str(e)}")
-        return jsonify({"error": str(e)}), 500
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    try:
-        raw_input = request.json['inputs']
-        input_df = pd.DataFrame([raw_input])
-        input_encoded = pd.get_dummies(input_df).reindex(columns=state["features"], fill_value=0)
-        input_sc = state["scaler"].transform(input_encoded)
-        res = state["models"][state["best_model_name"]].predict(input_sc)[0]
-        if not state["is_reg"]: res = state["le_y"].inverse_transform([int(res)])[0]
-        return jsonify({"prediction": str(res)})
-    except Exception as e: return jsonify({"error": str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+            if (usernameInput === VALID_USER && passwordInput === VALID_PASS) {
+                window.location.href = "/home";
+            } else {
+                errorBox.classList.remove('hidden');
+                document.getElementById('password').value = "";
+            }
+        });
+    </script>
+</body>
+</html>
