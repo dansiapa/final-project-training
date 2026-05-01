@@ -1,7 +1,3 @@
-Berikut adalah format lengkap `README.md` yang telah diperbarui untuk mencakup seluruh fitur terbaru, termasuk modul **Deep Forensic Audit**, integrasi kamera, serta panduan teknis yang komprehensif:
-
----
-
 # 🚀 Smart ML & Deep Forensic Auditor
 ###### Astra Digital Training - Advance Data Analytics & Computer Vision
 
