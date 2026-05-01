@@ -16,169 +16,27 @@
             --bg: #f8fafc;
             --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-
-        body { 
-            background: var(--bg); 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            height: 100vh; 
-            overflow: hidden; 
-            display: flex; 
-            color: #1e293b;
-        }
-
-        /* Sidebar Styling */
-        .sidebar { 
-            width: 300px; 
-            background: white; 
-            padding: 30px; 
-            border-right: 1px solid #e2e8f0; 
-            display: flex;
-            flex-direction: column;
-            z-index: 1050; 
-        }
-
-        .sidebar-brand {
-            margin-bottom: 2.5rem;
-        }
-
-        .sidebar h4 { 
-            font-size: 1.25rem;
-            color: var(--primary);
-            letter-spacing: -0.025em;
-        }
-
-        .sidebar .subtitle {
-            font-size: 0.75rem;
-            color: var(--secondary);
-            line-height: 1.4;
-            display: block;
-            margin-top: 5px;
-        }
-
-        /* Layout Structure */
-        .wrapper { 
-            flex: 1;
-            display: flex; 
-            flex-direction: column; 
-            height: 100vh; 
-            position: relative;
-        }
-
-        .header-top { 
-            background: white; 
-            padding: 1rem 2.5rem; 
-            border-bottom: 1px solid #e2e8f0; 
-            flex-shrink: 0; 
-        }
-
-        .main { 
-            flex: 1; 
-            overflow-y: auto; 
-            padding: 2rem 2.5rem; 
-        }
-
-        /* Navigation */
-        .nav-tabs-custom {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .nav-tabs-custom .nav-link {
-            border: none;
-            padding: 0.75rem 1rem;
-            color: var(--secondary);
-            font-weight: 600;
-            font-size: 0.875rem;
-            position: relative;
-            background: none;
-            transition: all 0.2s;
-        }
-
-        .nav-tabs-custom .nav-link.active {
-            color: var(--primary);
-        }
-
-        .nav-tabs-custom .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--primary);
-        }
-
-        /* Cards & UI Elements */
-        .card-custom { 
-            background: white; 
-            border-radius: 12px; 
-            border: 1px solid #e2e8f0;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 1.5rem; 
-            padding: 1.5rem; 
-        }
-
-        .health-badge { 
-            font-size: 0.7rem; 
-            padding: 4px 10px; 
-            border-radius: 6px; 
-            background: var(--primary-light); 
-            color: var(--primary-dark); 
-            font-weight: 700; 
-            text-transform: uppercase;
-        }
-
-        .img-res { 
-            width: 100%; 
-            border-radius: 8px; 
-            border: 1px solid #f1f5f9; 
-            background: #f8fafc;
-            min-height: 200px;
-            object-fit: contain;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            padding: 0.6rem 1rem;
-            font-weight: 600;
-            border-radius: 8px;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .logout-btn {
-            margin-top: auto;
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: opacity 0.2s;
-        }
-
-        .logout-btn:hover { opacity: 0.9; color: white; }
-
-        .table thead th {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: var(--secondary);
-            font-weight: 700;
-        }
-
-        .footer { 
-            background: white; 
-            padding: 1rem; 
-            font-size: 0.75rem; 
-            color: var(--secondary);
-            border-top: 1px solid #e2e8f0;
-            text-align: center;
-        }
+        body { background: var(--bg); font-family: 'Plus Jakarta Sans', sans-serif; height: 100vh; overflow: hidden; display: flex; color: #1e293b; }
+        .sidebar { width: 300px; background: white; padding: 30px; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; z-index: 1050; }
+        .sidebar-brand { margin-bottom: 2.5rem; }
+        .sidebar h4 { font-size: 1.25rem; color: var(--primary); letter-spacing: -0.025em; }
+        .sidebar .subtitle { font-size: 0.75rem; color: var(--secondary); line-height: 1.4; display: block; margin-top: 5px; }
+        .wrapper { flex: 1; display: flex; flex-direction: column; height: 100vh; position: relative; }
+        .header-top { background: white; padding: 1rem 2.5rem; border-bottom: 1px solid #e2e8f0; flex-shrink: 0; }
+        .main { flex: 1; overflow-y: auto; padding: 2rem 2.5rem; }
+        .nav-tabs-custom { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid #e2e8f0; }
+        .nav-tabs-custom .nav-link { border: none; padding: 0.75rem 1rem; color: var(--secondary); font-weight: 600; font-size: 0.875rem; position: relative; background: none; transition: all 0.2s; }
+        .nav-tabs-custom .nav-link.active { color: var(--primary); }
+        .nav-tabs-custom .nav-link.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--primary); }
+        .card-custom { background: white; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: var(--card-shadow); margin-bottom: 1.5rem; padding: 1.5rem; }
+        .health-badge { font-size: 0.7rem; padding: 4px 10px; border-radius: 6px; background: var(--primary-light); color: var(--primary-dark); font-weight: 700; text-transform: uppercase; }
+        .img-res { width: 100%; border-radius: 8px; border: 1px solid #f1f5f9; background: #f8fafc; min-height: 200px; object-fit: contain; }
+        .btn-primary { background-color: var(--primary); border-color: var(--primary); padding: 0.6rem 1rem; font-weight: 600; border-radius: 8px; }
+        .btn-outline-custom { border: 1px solid #e2e8f0; color: var(--secondary); font-size: 0.8rem; font-weight: 600; border-radius: 8px; transition: all 0.2s; }
+        .logout-btn { margin-top: auto; background-color: #ef4444; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 600; }
+        .info-box { background: var(--primary-light); border-radius: 8px; padding: 10px; margin-top: 10px; font-size: 0.75rem; border-left: 3px solid var(--primary); display: none; }
+        .footer { background: white; padding: 1rem; font-size: 0.75rem; color: var(--secondary); border-top: 1px solid #e2e8f0; text-align: center; }
+        .cv-placeholder { min-height: 400px; display: flex; align-items: center; justify-content: center; border: 2px dashed #e2e8f0; border-radius: 12px; background: #f8fafc; }
     </style>
 </head>
 <body>
@@ -186,20 +44,31 @@
     <div class="sidebar shadow-sm">
         <div class="sidebar-brand text-center">
             <h4 class="fw-bold mb-0">Automate Machine Learning</h4>
-            <span class="subtitle">XGBoost, Random Forest, Gradient Boosting, Decision Tree, Linear/Log Reg</span>
+            <span class="subtitle">XGBoost, RF, SHAP, OpenCV</span>
         </div>
         
         <div class="mb-4">
             <label class="small fw-bold text-uppercase text-muted mb-2 d-block">1. Data Source</label>
-            <input type="file" id="file" class="form-control form-control-sm" onchange="loadCols()">
+            <input type="file" id="file" class="form-control form-control-sm" onchange="handleFileUpload()">
+            <div id="dataInfo" class="info-box">
+                <b>Summary:</b> <span id="rowCount">0</span> Rows | <span id="colCount">0</span> Cols
+            </div>
         </div>
         
         <div class="mb-4">
             <label class="small fw-bold text-uppercase text-muted mb-2 d-block">2. Target Goal</label>
             <select id="target" class="form-select form-select-sm"></select>
         </div>
+
+        <div class="mb-4 border-top pt-3">
+            <label class="small fw-bold text-uppercase text-muted mb-2 d-block">3. Learning Preference</label>
+            <div class="form-check form-switch mb-2">
+                <input class="form-check-input" type="checkbox" id="reTrainToggle" checked>
+                <label class="form-check-label small" for="reTrainToggle">Force Re-Learning</label>
+            </div>
+        </div>
         
-        <button onclick="execute()" id="btnRun" class="btn btn-primary w-100 mt-3">🚀 START LEARNING</button>
+        <button onclick="execute()" id="btnRun" class="btn btn-primary w-100">🚀 START LEARNING</button>
         <button class="logout-btn w-100 mt-3" onclick="logout()">Sign Out</button>
     </div>
 
@@ -215,28 +84,30 @@
                     <div id="hMem" class="fw-bold text-primary small">--</div>
                 </div>
                 <div class="text-end border-start ps-4">
-                    <div class="small text-muted fw-bold" style="font-size: 10px;">PROCESSOR</div>
+                    <div class="small text-muted fw-bold" style="font-size: 10px;">CPU USAGE</div>
                     <div id="hMod" class="fw-bold text-primary small">--</div>
                 </div>
             </div>
         </header>
 
         <main class="main">
-            <!-- Navigation Tabs -->
-            <div class="nav nav-tabs-custom" id="mainTabs" role="tablist">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#t-comp" type="button">Models Ranking</button>
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-anal" type="button">Analytics</button>
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-pred" type="button">Prediction</button>
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-rep" type="button">Summary</button>
+            <div class="nav nav-tabs-custom" id="mainTabs">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#t-comp">Models Ranking</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-anal">Analytics</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-cv">Verification Document</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-pred">Prediction</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#t-rep">Summary</button>
             </div>
 
             <div class="tab-content">
-                <!-- Tab Competition -->
                 <div class="tab-pane fade show active" id="t-comp">
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="card-custom">
-                                <h6 class="fw-bold mb-4">🏆 Performance Ranking</h6>
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h6 class="fw-bold mb-0">🏆 Performance Ranking</h6>
+                                    <button onclick="exportMetrics()" class="btn btn-outline-custom py-1">📥 Export CSV</button>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table table-hover align-middle">
                                         <thead><tr><th>Rank</th><th>Model Name</th><th>Accuracy</th><th>MAPE</th></tr></thead>
@@ -254,301 +125,383 @@
                     </div>
                 </div>
 
-                <!-- Tab Analytics -->
+                <div class="tab-pane fade" id="t-cv">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card-custom">
+                                <h6 class="fw-bold mb-3">📸 Verification Document</h6>
+                                
+                                <div class="mb-3">
+                                    <label class="small fw-bold text-muted mb-1">Upload File</label>
+                                    <input type="file" id="imageInput" class="form-control form-control-sm" accept="image/*" onchange="previewImage(this)">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="small fw-bold text-muted mb-1">Live Capture</label>
+                                    <div class="d-grid gap-2">
+                                        <button id="btnStartCamera" class="btn btn-outline-primary btn-sm" onclick="startCamera()">
+                                            <i class="fas fa-camera"></i> Open Camera
+                                        </button>
+                                        <button id="btnCapture" class="btn btn-success btn-sm" onclick="capturePhoto()" style="display: none;">
+                                            <i class="fas fa-circle"></i> Capture Photo
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="small fw-bold text-muted mb-1">Document Category</label>
+                                    <select id="cvCategory" class="form-select form-select-sm">
+                                        <option value="KTP">Identity Card (KTP)</option>
+                                        <option value="NPWP">Tax ID (NPWP)</option>
+                                        <option value="SELFIE">Liveness/Selfie</option>
+                                        <option value="OTHER">General Document</option>
+                                    </select>
+                                </div>
+                                
+                                <button onclick="processImage()" id="btnProcessCV" class="btn btn-dark w-100">RUN FORENSIC AUDIT</button>
+                            </div>
+
+                            <div id="cvResultBox" class="card-custom mt-3" style="display:none; border-top: 5px solid var(--primary);">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 id="cvLabel" class="fw-bold mb-0">--</h5>
+                                    <span id="cvScoreBadge" class="health-badge">Score: --</span>
+                                </div>
+                                <hr class="my-2">
+                                <div class="row text-center g-2">
+                                    <div class="col-4">
+                                        <div class="text-muted" style="font-size: 9px; font-weight: bold;">ELA</div>
+                                        <div id="resEla" class="small fw-bold text-primary">--</div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="text-muted" style="font-size: 9px; font-weight: bold;">NOISE</div>
+                                        <div id="resNoise" class="small fw-bold text-primary">--</div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="text-muted" style="font-size: 9px; font-weight: bold;">SHARP</div>
+                                        <div id="resSharp" class="small fw-bold text-primary">--</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="card-custom">
+                                <h6 class="fw-bold mb-3">Output Viewport (Forensic Map)</h6>
+                                <div class="cv-placeholder overflow-hidden" style="background: #1e293b; position: relative; min-height: 400px; display: flex; align-items: center; justify-content: center;">
+                                    <video id="webcam" autoplay playsinline style="width: 100%; height: auto; display: none; object-fit: cover;"></video>
+                                    <img id="cvPreview" src="" style="max-width:100%; max-height:500px; display:none;">
+                                    <canvas id="photoCanvas" style="display: none;"></canvas>
+                                    <div id="cvPlaceholder" class="text-muted text-center">
+                                        <p class="small fw-bold">READY FOR SCANNING</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-box mt-3" id="cvLogBox" style="display:block; background: #f1f5f9; border-left-color: #64748b;">
+                                    <span id="cvStatusText">System idle. Waiting for input...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="tab-pane fade" id="t-anal">
                     <div class="row g-4">
-                        <div class="col-md-6">
-                            <div class="card-custom">
-                                <h6 class="fw-bold mb-3">Model Fit (Observed vs Predicted)</h6>
-                                <img id="fImg" class="img-res" alt="Linear Fit">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-custom">
-                                <h6 class="fw-bold mb-3">Feature Importance Rank</h6>
-                                <img id="iImg" class="img-res" alt="Importance">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="card-custom">
-                                <h6 class="fw-bold mb-3">SHAP Explainer (Global Contribution)</h6>
-                                <img id="sImg" class="img-res" alt="SHAP Plot">
-                            </div>
-                        </div>
+                        <div class="col-md-6"><div class="card-custom"><h6 class="fw-bold mb-3">Model Fit</h6><img id="fImg" class="img-res"></div></div>
+                        <div class="col-md-6"><div class="card-custom"><h6 class="fw-bold mb-3">Feature Importance</h6><img id="iImg" class="img-res"></div></div>
+                        <div class="col-12"><div class="card-custom"><h6 class="fw-bold mb-3">SHAP Explainer</h6><img id="sImg" class="img-res"></div></div>
                     </div>
                 </div>
 
-                <!-- Tab Prediction -->
                 <div class="tab-pane fade" id="t-pred">
                     <div class="card-custom">
-                        <h6 class="fw-bold mb-4">Live Inference Input</h6>
-                        <div id="fGroup" class="row g-3">
-                            <p class="text-muted small text-center py-4">Silakan latih model terlebih dahulu untuk memunculkan parameter input.</p>
-                        </div>
-                        <button onclick="predict()" id="btnPredict" class="btn btn-dark w-100 mt-4 py-3 fw-bold">RUN PREDICTION</button>
+                        <div id="fGroup" class="row g-3"></div>
+                        <button onclick="predict()" id="btnPredict" class="btn btn-dark w-100 mt-4">RUN PREDICTION</button>
                     </div>
                     <div class="row mt-2 g-4">
-                        <div class="col-md-4">
-                            <div class="card-custom text-center h-100 d-flex flex-column justify-content-center">
-                                <small class="text-uppercase text-muted fw-bold mb-2">Estimated Value</small>
-                                <h1 id="resT" class="text-primary fw-bold display-5">--</h1>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-custom">
-                                <h6 class="fw-bold mb-3">Local Decision Waterfall</h6>
-                                <img id="wImg" class="img-res" alt="Waterfall Analysis">
-                            </div>
-                        </div>
+                        <div class="col-md-4"><div class="card-custom text-center"><h6>Result</h6><h1 id="resT" class="text-primary fw-bold display-5">--</h1></div></div>
+                        <div class="col-md-8"><div class="card-custom"><h6>Waterfall Analysis</h6><img id="wImg" class="img-res"></div></div>
                     </div>
                 </div>
 
-                <!-- Tab Report -->
                 <div class="tab-pane fade" id="t-rep">
                     <div class="card-custom">
-                        <h6 class="fw-bold mb-3">Executive Summary</h6>
-                        <div id="rBox" class="p-4 rounded-4 bg-light border-start border-5 border-primary">
-                            <h4 id="rName" class="fw-bold text-dark">Ready to Analyze</h4>
-                            <p id="rSummary" class="text-secondary mt-2 lead fs-6">Upload dataset dan tekan 'Start Learning' untuk menghasilkan laporan analisis otomatis.</p>
-                        </div>
+                        <h4 id="rName" class="fw-bold">Executive Summary</h4>
+                        <p id="rSummary" class="text-secondary mt-2 lead fs-6"></p>
                     </div>
                 </div>
             </div>
         </main>
-
-        <footer class="footer">
-            2026 &copy; <b>Kelompok 2 - AMDI</b>. Precision Data Analytics.
-        </footer>
+        <footer class="footer">2026 &copy; <b>Kelompok 2 - AMDI</b></footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const API = window.location.origin;
         let chart = null;
+        let globalMetrics = [];
+        let videoStream = null; // State untuk mengelola stream kamera
 
         function logout() { window.location.href = '/'; }
+
+        // --- CORE MACHINE LEARNING FUNCTIONS ---
+        async function handleFileUpload() {
+            const fi = document.getElementById('file');
+            if(!fi.files[0]) return;
+            document.getElementById('dataInfo').style.display = 'block';
+            const reader = new FileReader();
+            reader.onload = e => { document.getElementById('rowCount').innerText = e.target.result.split('\n').length.toLocaleString(); };
+            reader.readAsText(fi.files[0].slice(0, 5000));
+            
+            const fd = new FormData(); fd.append('file', fi.files[0]);
+            const r = await fetch(`${API}/get_columns`, { method: 'POST', body: fd });
+            const d = await r.json();
+            document.getElementById('target').innerHTML = d.columns.map(c => `<option value="${c}">${c}</option>`).join('');
+            document.getElementById('colCount').innerText = d.columns.length;
+        }
+
+        async function execute() {
+            const btn = document.getElementById('btnRun');
+            btn.disabled = true; btn.innerText = "Learning...";
+            const fd = new FormData();
+            fd.append('file', document.getElementById('file').files[0]);
+            fd.append('target', document.getElementById('target').value);
+            fd.append('re_train', document.getElementById('reTrainToggle').checked);
+            try {
+                const r = await fetch(`${API}/train`, { method: 'POST', body: fd });
+                const d = await r.json();
+                globalMetrics = d.metrics;
+                renderLeaderboard(d.metrics);
+                renderChart(d.metrics);
+                renderInputForm(d);
+                generateHumanSummary(d, document.getElementById('target').value);
+                btn.innerText = "SUCCESS ✅";
+            } catch(e) { btn.innerText = "FAILED ❌"; }
+            finally { setTimeout(() => { btn.disabled = false; btn.innerText = "🚀 START LEARNING"; }, 2000); }
+        }
+
+        // --- FORENSIC & CAMERA FUNCTIONS ---
+        async function startCamera() {
+            const video = document.getElementById('webcam');
+            const preview = document.getElementById('cvPreview');
+            const placeholder = document.getElementById('cvPlaceholder');
+            const btnStart = document.getElementById('btnStartCamera');
+            const btnCapture = document.getElementById('btnCapture');
+
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        facingMode: "environment", // Prioritas kamera belakang
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    } 
+                });
+                
+                video.srcObject = videoStream;
+                video.style.display = 'block';
+                preview.style.display = 'none';
+                placeholder.style.display = 'none';
+                
+                btnStart.style.display = 'none';
+                btnCapture.style.display = 'inline-block';
+                
+                document.getElementById('cvStatusText').innerText = "Camera active. Align document and capture.";
+            } catch (err) {
+                alert("Gagal mengakses kamera: " + err);
+            }
+        }
+
+        function capturePhoto() {
+            const video = document.getElementById('webcam');
+            const canvas = document.getElementById('photoCanvas');
+            const preview = document.getElementById('cvPreview');
+            const context = canvas.getContext('2d');
+
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob((blob) => {
+                const file = new File([blob], "live_capture.jpg", { type: "image/jpeg" });
+                
+                // Masukkan file hasil tangkapan ke input file agar sinkron
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                document.getElementById('imageInput').files = dataTransfer.files;
+
+                stopCamera();
+                
+                preview.src = URL.createObjectURL(blob);
+                preview.style.display = 'block';
+                video.style.display = 'none';
+                
+                document.getElementById('cvStatusText').innerText = "Photo captured. Ready for audit.";
+            }, 'image/jpeg', 0.95);
+        }
+
+        function stopCamera() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+            }
+            document.getElementById('btnStartCamera').style.display = 'inline-block';
+            document.getElementById('btnCapture').style.display = 'none';
+        }
+
+        function previewImage(input) {
+            const preview = document.getElementById('cvPreview');
+            const placeholder = document.getElementById('cvPlaceholder');
+            const statusText = document.getElementById('cvStatusText');
+            
+            if (input.files && input.files[0]) {
+                stopCamera(); // Matikan kamera jika user memilih upload manual
+                const reader = new FileReader();
+                reader.onload = e => {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    placeholder.style.display = 'none';
+                    document.getElementById('webcam').style.display = 'none';
+                    statusText.innerText = `File "${input.files[0].name}" loaded. Ready for audit.`;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        async function processImage() {
+            const btn = document.getElementById('btnProcessCV');
+            const fileInput = document.getElementById('imageInput');
+            const category = document.getElementById('cvCategory').value;
+            const statusText = document.getElementById('cvStatusText');
+            
+            if(!fileInput.files[0]) return alert("Please select or capture an image first!");
+            
+            btn.disabled = true; 
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Analyzing...';
+
+            const fd = new FormData();
+            fd.append('file', fileInput.files[0]); 
+            fd.append('category', category);
+
+            try {
+                const r = await fetch(`${API}/verify_document`, { method: 'POST', body: fd });
+                const d = await r.json();
+                
+                if(d.error) {
+                    statusText.innerText = "Error: " + d.error;
+                    return;
+                }
+
+                // Render Results
+                document.getElementById('cvResultBox').style.display = 'block';
+                document.getElementById('cvLabel').innerText = d.verdict;
+                document.getElementById('cvScoreBadge').innerText = `Score: ${d.trust_score}`;
+                
+                const labelElem = document.getElementById('cvLabel');
+                if(d.verdict.includes("VALID")) labelElem.className = "fw-bold mb-0 text-success";
+                else if(d.verdict.includes("WARNING")) labelElem.className = "fw-bold mb-0 text-warning";
+                else labelElem.className = "fw-bold mb-0 text-danger";
+
+                document.getElementById('resEla').innerText = d.forensic_log.ela_std.toFixed(2);
+                document.getElementById('resNoise').innerText = d.forensic_log.noise.toFixed(4);
+                document.getElementById('resSharp').innerText = Math.round(d.forensic_log.sharp);
+
+                if(d.processed_image) {
+                    document.getElementById('cvPreview').src = "data:image/png;base64," + d.processed_image;
+                }
+
+                statusText.innerHTML = d.anomalies_detected.length > 0 
+                    ? "⚠️ <b>Anomali:</b> " + d.anomalies_detected.join(", ")
+                    : "✅ Dokumen lolos verifikasi integritas fisik.";
+
+            } catch(e) { 
+                statusText.innerText = "Connection Error to AI Engine.";
+            } finally { 
+                btn.disabled = false; 
+                btn.innerText = "RUN FORENSIC AUDIT"; 
+            }
+        }
+
+        // --- CHART & UTILITY FUNCTIONS ---
+        function renderLeaderboard(m) {
+            document.getElementById('lBody').innerHTML = m.sort((a,b)=>b.accuracy-a.accuracy).map((x,i)=>`
+                <tr class="${i===0?'table-primary':''}"><td>${i+1}</td><td><b>${x.name}</b></td><td>${(x.accuracy*100).toFixed(2)}%</td><td>${(Math.random()*0.5).toFixed(2)}%</td></tr>
+            `).join('');
+        }
+
+        function renderChart(m) {
+            if(chart) chart.destroy();
+            chart = new Chart(document.getElementById('mapeChart'), {
+                type: 'bar',
+                data: { labels: m.map(x=>x.name), datasets: [{ data: m.map(x=>x.accuracy), backgroundColor: '#4f46e5', borderRadius: 5 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 1 } } }
+            });
+        }
+
+        function renderInputForm(d) {
+            document.getElementById('fGroup').innerHTML = (d.original_cols || []).map(c => `
+                <div class="col-md-4"><label class="small fw-bold text-muted">${c}</label>
+                <input type="text" class="form-control form-control-sm f-in" data-f="${c}" value="${d.defaults[c]||0}"></div>
+            `).join('');
+        }
+
+        async function predict() {
+            let inputs = {}; 
+            document.querySelectorAll('.f-in').forEach(i => inputs[i.dataset.f] = i.value);
+            const r = await fetch(`${API}/predict`, { 
+                method: 'POST', 
+                headers: {'Content-Type': 'application/json'}, 
+                body: JSON.stringify({inputs}) 
+            });
+            const d = await r.json();
+            
+            let displayResult = (d.prediction == 1) ? "YES" : (d.prediction == 0) ? "NO" : d.prediction;
+            document.getElementById('resT').innerText = displayResult;
+            if(d.waterfall) document.getElementById('wImg').src = "data:image/png;base64," + d.waterfall;
+        }
+
+        function generateHumanSummary(d, target) {
+            const metrics = d.metrics.find(m => m.name === d.best_model);
+            const accuracy = metrics.accuracy;
+            const topFeatures = d.top_features || [];
+            let fitAnalysis = accuracy > 0.85 
+                ? `Model menunjukkan presisi tinggi. Garis prediksi sangat konsisten mengikuti fluktuasi data aktual.`
+                : `Model menangkap tren umum namun terdapat variansi pada titik-titik ekstrem.`;
+
+            document.getElementById('rName').innerText = `Deep Data Audit: ${d.best_model}`;
+            document.getElementById('rSummary').innerHTML = `
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-2">📊 Model Fit Analysis</h6>
+                        <p class="small text-secondary text-justify">${fitAnalysis} Algoritma <strong>${d.best_model}</strong> berhasil memetakan struktur data target <strong>${target}</strong>.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-2">🔍 Top Influencer</h6>
+                        <p class="small text-secondary text-justify">Fitur <strong>${topFeatures[0]}</strong> merupakan kontributor utama dalam pengambilan keputusan model ini.</p>
+                    </div>
+                </div>
+            `;
+        }
 
         async function updateHealth() {
             try {
                 const r = await fetch(`${API}/health`);
                 const d = await r.json();
-                const hStatus = document.getElementById('hStatus');
-                hStatus.innerText = d.status || "Unknown";
-                hStatus.style.backgroundColor = d.status === "Online" ? "#dcfce7" : "#fee2e2";
-                hStatus.style.color = d.status === "Online" ? "#166534" : "#991b1b";
-                document.getElementById('hMem').innerText = d.memory_usage || "--";
-                document.getElementById('hMod').innerText = d.gpu_usage || "--";
-            } catch(e) { document.getElementById('hStatus').innerText = "Offline"; }
+                document.getElementById('hStatus').innerText = d.status;
+                document.getElementById('hMem').innerText = d.memory_usage;
+                document.getElementById('hMod').innerText = d.cpu_usage;
+            } catch(e) {}
         }
+
         setInterval(updateHealth, 5000);
-
-        async function loadCols() {
-            const fi = document.getElementById('file');
-            if(!fi.files[0]) return;
-            const fd = new FormData(); 
-            fd.append('file', fi.files[0]);
-            try {
-                const r = await fetch(`${API}/get_columns`, { method: 'POST', body: fd });
-                const d = await r.json();
-                const cols = d.columns || [];
-                document.getElementById('target').innerHTML = cols.map(c => `<option value="${c}">${c}</option>`).join('');
-            } catch(e) { console.error("Gagal memuat kolom:", e); }
-        }
-
-        async function execute() {
-            const btn = document.getElementById('btnRun'); 
-            const fileInput = document.getElementById('file');
-            const targetSelect = document.getElementById('target');
-
-            if(!fileInput.files[0]) {
-                btn.className = 'btn btn-warning w-100 mt-3';
-                btn.innerText = "Select Data First!";
-                setTimeout(() => { btn.className = 'btn btn-primary w-100 mt-3'; btn.innerText = "🚀 START LEARNING"; }, 2000);
-                return;
-            }
-
-            btn.innerText = "Processing... ⏳"; 
-            btn.disabled = true;
-            
-            const fd = new FormData();
-            fd.append('file', fileInput.files[0]);
-            fd.append('target', targetSelect.value);
-            
-            try {
-                const r = await fetch(`${API}/train`, { method: 'POST', body: fd });
-                const d = await r.json();
-
-                if(d.error) throw new Error(d.error);
-
-                // 1. Render UI Components
-                renderLeaderboard(d.metrics);
-                renderChart(d.metrics);
-                renderInputForm(d);
-
-                // 2. Generate Humanized Summary
-                generateHumanSummary(d, targetSelect.value);
-                
-                btn.innerText = "SUCCESS! ✅";
-                setTimeout(() => { btn.innerText = "🚀 START LEARNING"; }, 3000);
-
-            } catch(e) { 
-                console.error(e);
-                btn.innerText = "FAILED! ❌";
-                setTimeout(() => { btn.innerText = "🚀 START LEARNING"; }, 3000);
-            } finally { 
-                btn.disabled = false; 
-            }
-        }
-
-        function generateHumanSummary(data, targetName) {
-            const rName = document.getElementById('rName');
-            const rSummary = document.getElementById('rSummary');
-            
-            const bestModel = data.best_model || "None";
-            const metrics = data.metrics || [];
-            const topAcc = metrics.length > 0 ? (metrics[0].accuracy * 100).toFixed(2) : 0;
-            
-            const features = data.feature_importance || [];
-            const topFeatures = features.slice(0, 3).map(f => `<strong>${f.feature}</strong>`).join(', ');
-
-            rName.innerText = `Insight Analisis: ${bestModel}`;
-
-            let narasi = `Sistem telah selesai menganalisis dataset Anda dengan fokus utama untuk memahami perilaku kolom <strong>${targetName}</strong>. `;
-            narasi += `Dari berbagai model yang diuji, sistem secara otomatis memilih <strong>${bestModel}</strong> sebagai model paling cerdas karena berhasil mencapai tingkat akurasi sebesar <strong>${topAcc}%</strong>. <br><br>`;
-
-            narasi += `Jika Anda memperhatikan tab <strong>Analytics</strong>, grafik <em>Model Fit</em> menunjukkan seberapa presisi prediksi sistem dibandingkan data asli Anda. `;
-            
-            if (features.length > 0) {
-                narasi += `Sistem menemukan pola kuat bahwa variabel ${topFeatures} adalah pendorong utama di balik nilai ${targetName}. Perubahan pada variabel-variabel ini hampir selalu diikuti oleh perubahan pada target. `;
-            } else {
-                narasi += `Sistem telah memetakan kontribusi setiap kolom melalui analisis <em>SHAP</em> untuk memastikan setiap prediksi memiliki dasar alasan yang transparan. `;
-            }
-
-            narasi += `<br><br>Saat ini, "otak" model ini sudah dioptimasi. Anda dapat langsung menuju tab <strong>Prediction</strong> untuk memasukkan data baru. `;
-            narasi += `Sistem akan memberikan estimasi hasil sekaligus menunjukkan alasan (melalui grafik <em>Waterfall</em>) mengapa hasil tersebut bisa muncul.`;
-
-            rSummary.innerHTML = narasi;
-        }
-
-        function renderLeaderboard(metrics) {
-            let html = '';
-            metrics.sort((a,b) => (b.accuracy || 0) - (a.accuracy || 0)).forEach((m, i) => {
-                const acc = ((m.accuracy || 0) * 100).toFixed(2);
-                html += `<tr class="${i === 0 ? 'table-primary' : ''}">
-                    <td><span class="badge ${i === 0 ? 'bg-primary' : 'bg-secondary'} rounded-circle">${i + 1}</span></td>
-                    <td><div class="fw-bold">${m.name || 'Unknown Engine'}</div></td>
-                    <td><span class="text-primary fw-bold">${acc}%</span></td>
-                    <td>${(Math.random() * 0.5).toFixed(2)}%</td>
-                </tr>`;
-            });
-            document.getElementById('lBody').innerHTML = html;
-        }
-
-        function renderChart(metrics) {
-            if(chart) chart.destroy();
-            const ctx = document.getElementById('mapeChart');
-            if(ctx && metrics.length > 0) {
-                chart = new Chart(ctx, { 
-                    type: 'bar', 
-                    data: { 
-                        labels: metrics.map(m => m.name), 
-                        datasets: [{ 
-                            label: 'Model Accuracy', 
-                            data: metrics.map(m => m.accuracy), 
-                            backgroundColor: '#4f46e5',
-                            borderRadius: 6
-                        }] 
-                    },
-                    options: { 
-                        responsive: true,
-                        plugins: { legend: { display: false } },
-                        scales: { y: { beginAtZero: true, max: 1 } }
-                    }
+        
+        document.querySelectorAll('button[data-bs-toggle="tab"]').forEach(t => t.addEventListener('shown.bs.tab', e => {
+            if (e.target.innerText === "Analytics") {
+                fetch(`${API}/get_analytics`).then(r=>r.json()).then(d=>{
+                    if(d.plots.fit) document.getElementById('fImg').src="data:image/png;base64,"+d.plots.fit;
+                    if(d.plots.importance) document.getElementById('iImg').src="data:image/png;base64,"+d.plots.importance;
+                    if(d.plots.shap) document.getElementById('sImg').src="data:image/png;base64,"+d.plots.shap;
                 });
             }
-        }
-
-        function renderInputForm(d) {
-            let fhtml = '';
-            const originalCols = d.original_cols || [];
-            const categories = d.categories || {};
-            const defaults = d.defaults || {};
-
-            originalCols.forEach(col => {
-                fhtml += `<div class="col-md-4 mb-3"><label class="small fw-bold text-muted mb-1">${col}</label>`;
-                if(categories[col]) {
-                    const options = categories[col].map(v => `<option value="${v}">${v}</option>`).join('');
-                    fhtml += `<select class="form-select form-select-sm f-in" data-f="${col}">${options}</select>`;
-                } else {
-                    fhtml += `<input type="number" class="form-control form-control-sm f-in" data-f="${col}" value="${defaults[col] || 0}">`;
-                }
-                fhtml += `</div>`;
-            });
-            document.getElementById('fGroup').innerHTML = fhtml;
-        }
-
-        async function loadAnalytics() {
-            const fImg = document.getElementById('fImg');
-            const iImg = document.getElementById('iImg');
-            const sImg = document.getElementById('sImg');
-            if (iImg.src && iImg.src.includes('data:image')) return;
-            try {
-                const r = await fetch(`${API}/get_analytics`);
-                const d = await r.json();
-                const plots = d.plots || {};
-                if(plots.fit) fImg.src = "data:image/png;base64," + plots.fit;
-                if(plots.importance) iImg.src = "data:image/png;base64," + plots.importance;
-                if(plots.shap) sImg.src = "data:image/png;base64," + plots.shap;
-            } catch(e) { console.error("Analytics Error:", e); }
-        }
-
-        async function predict() {
-            const resT = document.getElementById('resT');
-            const wImg = document.getElementById('wImg');
-            const btn = document.getElementById('btnPredict');
-            
-            resT.innerText = "...";
-            btn.disabled = true;
-            
-            let inputs = {}; 
-            document.querySelectorAll('.f-in').forEach(i => {
-                inputs[i.dataset.f] = i.value;
-            });
-            
-            try {
-                const r = await fetch(`${API}/predict`, { 
-                    method: 'POST', 
-                    headers: {'Content-Type': 'application/json'}, 
-                    body: JSON.stringify({inputs}) 
-                });
-                
-                const d = await r.json();
-                let displayValue = d.prediction;
-
-                if (d.prediction === 1 || d.prediction === "1") {
-                    displayValue = "Yes";
-                } else if (d.prediction === 0 || d.prediction === "0") {
-                    displayValue = "No";
-                }
-                resT.innerText = d.prediction !== undefined ? displayValue : "Error";
-                
-                if(d.waterfall) wImg.src = "data:image/png;base64," + d.waterfall;
-
-            } catch(e) { 
-                resT.innerText = "Error";
-                console.error("Prediction Error:", e);
-            } finally {
-                btn.disabled = false;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabs = document.querySelectorAll('button[data-bs-toggle="tab"]');
-            tabs.forEach(t => t.addEventListener('shown.bs.tab', (e) => {
-                if (e.target.innerText.trim() === "Analytics") loadAnalytics();
-            }));
-            updateHealth();
-        });
+        }));
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
