@@ -1,0 +1,66 @@
+name: Machine Learning
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-pack:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install shiv  # Tool untuk packaging
+
+    - name: Validate ML Model
+      run: |
+        # Pastikan file model ada sebelum dipaketkan
+        if [ -f "model.pkl" ]; then
+            echo "Model file found."
+        else
+            echo "Model file missing!" && exit 1
+        fi
+
+    - name: Run Tests
+      run: |
+        # Menjalankan unit test untuk memastikan API dan logika model berjalan
+        pytest
+
+    - name: Package as WAR
+      run: |
+        # 1. Buat struktur direktori WAR
+        mkdir -p dist/WEB-INF/lib
+        
+        # 2. Package Flask + ML Model menjadi satu file executable zip (.pyz)
+        # -c app:app mengasumsikan file utama Anda app.py dengan variabel app = Flask(__name__)
+        shiv --site-packages . -c app:app -o dist/WEB-INF/ml_app.pyz .
+
+        # 3. Buat file web.xml (Standard metadata untuk file WAR)
+        cat <<EOF > dist/WEB-INF/web.xml
+        <?xml version="1.0" encoding="UTF-8"?>
+        <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="3.1">
+          <display-name>Machine Learning</display-name>
+        </web-app>
+        EOF
+
+        # 4. Kompres menjadi file .war
+        cd dist && zip -r ../ml-prediction.war *
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ml-prediction-war
+        path: ml-prediction.war
